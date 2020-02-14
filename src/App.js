@@ -12,7 +12,7 @@ import './App.css';
 
 
 const app = new Clarifai.App({
-  apiKey: "" // ENTER API KEY HERE!
+  apiKey: "44eb2cac860548998e169967f7be216a" // ENTER API KEY HERE!
 });
 
 const particlesOptions = {
@@ -81,11 +81,12 @@ class App extends Component{
   }
 
   render(){
+    const { isSignedIn, imageUrl, route, box } = this.state;
     return (
 			<div className="App">
       	<Particles className="particles" params={particlesOptions} />
-				<Navigation isSignedIn={this.state.isSignedIn} onRouteChange={this.onRouteChange} />
-        { this.state.route === "home"
+				<Navigation isSignedIn={isSignedIn} onRouteChange={this.onRouteChange} />
+        { route === "home"
           ? <div>
               <Logo />
               <Rank />
@@ -93,10 +94,10 @@ class App extends Component{
               onInputChange={this.onInputChange}
               onButtonSubmit={this.onButtonSubmit}
               />
-              <FaceRecognition box={this.state.box} imageUrl={this.state.imageUrl}/>
+              <FaceRecognition box={box} imageUrl={imageUrl}/>
             </div>
           : (
-            this.state.route === "signin"
+            route === "signin"
             ? <Signin onRouteChange={this.onRouteChange} />
             : <Register onRouteChange={this.onRouteChange} />
           )
